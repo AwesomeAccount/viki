@@ -36,12 +36,7 @@ if (process.env.NO_RUSH && process.env.NO_RUSH != "") {
         return;
     }
     
-    authorCodeList = await getAuthorCodeList('https://gitee.com/fatelight/code/raw/master/lzdz1_dapai2.json')
-    if($.getAuthorCodeListerr === false){
-        authorCodeList = [
-            'fe7c806ba1ce4bf09d52bf50df511f98',
-        ]
-    }
+    authorCodeList = []
 
     for (let i = 0; i < cookiesArr.length; i++) {
         if (cookiesArr[i]) {
@@ -64,8 +59,7 @@ if (process.env.NO_RUSH && process.env.NO_RUSH != "") {
             $.bean = 0;
             $.ADID = getUUID('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', 1);
             $.UUID = getUUID('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
-            // $.authorCode = authorCodeList[random(0, authorCodeList.length)]
-            $.authorCode = ownCode ? ownCode : authorCodeList[random(0, authorCodeList.length)]
+            $.authorCode = ownCode;
             $.authorNum = `${random(1000000, 9999999)}`
             $.randomCode = random(1000000, 9999999)
             $.activityId = 'dzkwdlt20211125A'

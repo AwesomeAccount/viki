@@ -91,17 +91,7 @@ if ($.isNode()) {
       await $.wait(2000);
     }
   }
-  let res = await getAuthorShareCode('')
-  if (!res) {
-    $.http.get({url: ''}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
-    await $.wait(1000)
-    res = await getAuthorShareCode('')
-  }
-  let res2 = await getAuthorShareCode('')
-  if (!res2) {
-    await $.wait(1000)
-    res2 = await getAuthorShareCode('')
-  }
+  let res = null;
   $.strMyShareIds = [...(res && res.shareId || []), ...(res2 || [])]
   await shareCodesFormat()
   for (let i = 0; i < cookiesArr.length; i++) {

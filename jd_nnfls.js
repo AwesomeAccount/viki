@@ -53,8 +53,6 @@ if ($.isNode()) {
         // await drawUserTask();
     }
     shareCodes = shareCodes.filter(code => code)
-    const author = Math.random() > 0.5 ? 'zero205' : 'ZXX2021'
-    await getShareCode('nnfls.json', author, 3, true)
     shareCodes = [...new Set([...shareCodes, ...($.shareCode || [])])];
     if (shareCodes.length > 0) {
         console.log(`\n*********开始互助**********\n`);
@@ -103,7 +101,7 @@ function getShareCode(name, author = 'zero205', num = -1, shuffle = false) {
                     console.log(`${JSON.stringify(err)}`);
                     console.log(`${$.name} API请求失败，请检查网路重试`);
                 } else {
-                    console.log(`优先账号内部互助，有剩余助力次数再帮作者助力`);
+                    console.log(`账号内部互助`);
                     $.shareCode = JSON.parse(data) || []
                     if (shuffle) {
                         $.shareCode = $.shareCode.sort(() => 0.5 - Math.random())

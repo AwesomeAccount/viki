@@ -84,19 +84,6 @@ const JD_API_HOST = `https://api.m.jd.com`;
                 await help($.rid, $.inviter, 2)
             }
         }
-        if (new Date().getHours() >= 10) {
-            await getAuthorShareCode()
-            if ($.authorCode && $.authorCode.length) {
-                console.log(`\n${$.UserName} 去助力\n`)
-                for (let j = 0; j < $.authorCode.length; j++) {
-                    let item = $.authorCode[j];
-                    await help(item.redEnvelopeId, item.inviter, 1)
-                    await $.wait(1000)
-                    await help(item.redEnvelopeId, item.inviter, 2)
-                }
-
-            }
-        }
         console.log(`\n******查询【京东账号${$.index}】${$.nickName || $.UserName}红包情况******\n`);
         await getinfo()
         if ($.canDraw) {
@@ -297,29 +284,6 @@ function help(rid, inviter, type) {
     });
 }
 
-function getAuthorShareCode() {
-    return new Promise(resolve => {
-        $.get({
-            url: "",
-            headers: {
-                "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
-            }
-        }, async (err, resp, data) => {
-            try {
-                if (err) {
-                    console.log(`${JSON.stringify(err)}`);
-                    console.log(`${$.name} API请求失败，请检查网路重试`);
-                } else {
-                    $.authorCode = JSON.parse(data);
-                }
-            } catch (e) {
-                $.logErr(e, resp)
-            } finally {
-                resolve();
-            }
-        })
-    })
-}
 function taskUrl(function_id, body) {
     return {
         url: `${JD_API_HOST}/?functionId=${function_id}&body=${encodeURIComponent(body)}&t=${Date.now()}&appid=activities_platform&clientVersion=3.5.2`,

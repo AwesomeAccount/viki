@@ -108,13 +108,6 @@ if ($.isNode()) {
   }
   let res = [];
   if(helpFlag){
-    res = await getAuthorShareCode('');
-    if(!res){
-      res = [];
-    }
-    if(res.length === 0){
-      return ;
-    }
     console.log(`\n===============开始助力作者团===================`);
     let thisTuanID = getRandomArrayElements(res, 1)[0];
     $.tuanMax = false;
